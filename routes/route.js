@@ -3,10 +3,8 @@ var router = express.Router();
 
 var mongoOp = require("../model/db");
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+/* Control Route */
+
 router.route("/control/article/add")
     .get(function(req,res){
       res.render('control/article/articleAdd', { title: 'New Article'})
@@ -30,7 +28,8 @@ router.route("/control/article/add")
     });
     /* Control Route END */
 
-    router.route("/article")
+    /* Api Routes */
+    router.route("/api/article")
     .get(function(req,res){
         var response = {};
         mongoOp.find({},function(err,data){
@@ -43,5 +42,17 @@ router.route("/control/article/add")
             res.json(response);
         });
     });
+    /* Api Routes End */
+
+    /*Pages Routes */
+    router.get('/', function(req, res, next) {
+      res.render('index', { title: 'Express' });
+    });
+
+    router.route("/article")
+    .get(function(req,res){
+        res.render('article/article', { title: 'Express' });
+    });
+    /*Pages Routes End */
 
 module.exports = router;
