@@ -14,7 +14,6 @@ router.route("/control/article/add")
     .post(function(req,res){
         var db = new mongoOp();
         var response = {};
-        // fetch email and password from REST request.
         // Add strict validation when you use this in Production.
         db.articleContent = req.body.content;
         db.articleDepartment = req.body.department;
