@@ -42,6 +42,20 @@ router.route("/control/article/add")
             res.json(response);
         });
     });
+
+    router.route("/api/article/:id")
+    .get(function(req,res){
+        var response = {};
+        mongoOp.findById(req.params.id,function(err,data){
+        // This will run Mongo Query to fetch data based on ID.
+            if(err) {
+                response = {"error" : true,"message" : "Error fetching data"};
+            } else {
+                response = {"error" : false,"message" : data};
+            }
+            res.json(response);
+        });
+    })
     /* Api Routes End */
 
     /*Pages Routes */
